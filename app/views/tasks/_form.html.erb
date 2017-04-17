@@ -1,35 +1,5 @@
-<%= form_for(task) do |f| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% task.errors.full_messages.each do |task| %>
-          <li><%= task %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-<%
-=begin
-%>
-  <% if status.errors.any? %>
-    <div id="error_explanation">
-      <ul>
-        <% status.errors.full_status.each do |status| %>
-          <li><%= status %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>  
-<%
-=end
-%>
-
-  <%= f.label :status, 'ステータス' %>
-  <%= f.text_field :status %>
-
-  <%= f.label :content, 'タスク' %>
-  <%= f.text_field :content %>
-  
-  <%= f.submit '投稿' %>
-<% end %>
+<div class="row">
+  <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+    <%= render 'form-input', task: task %>
+  </div>
+</div>
