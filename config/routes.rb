@@ -17,8 +17,17 @@ Rails.application.routes.draw do
   #get 'messages/:id/edit', to: 'messages#edit'
   
    # ルートページはmessage 一覧
-  root to: 'tasks#index'
+  #root to: 'tasks#index'
+  root to: 'toppages#index'
+  
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   
   # 上記七ページの表示をまとめている
   resources :tasks
+  
+  # ユーザー管理
+  get 'signup', to: 'users#new'
+  resources :users, only: [:index, :show, :new, :create]
 end
