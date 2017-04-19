@@ -3,6 +3,11 @@ class TasksController < ApplicationController
   
   def index
     @tasks = Task.all.page(params[:page]).per(10)
+    if logged_in?
+      @user = current_user
+      @task = current_user.tasks.build  # form_for 用
+      @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
+    end
   end
 
   def show
@@ -13,8 +18,8 @@ class TasksController < ApplicationController
   end
 
   def create
-     @task = Task.new(task_params)
-
+    @task = Task.new(task_params)
+    @task.user_id = current_user.id
     if @task.save
       flash[:success] = 'Task が正常に投稿されました'
       redirect_to @task
@@ -51,6 +56,7 @@ class TasksController < ApplicationController
   end
 
   # Strong Parameter
+  
   def task_params
     params.require(:task).permit(:content, :status)
   end

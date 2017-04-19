@@ -1,24 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  
   # CRUD
-  #get 'messages/:id', to: 'messages#show'
-  #post 'messages', to: 'messages#create'
-  #put 'messages/:id', to: 'messages#update'
-  #delete 'messages/:id', to: 'messages#destroy'
-  
+    #get 'messages/:id', to: 'messages#show'
+    #post 'messages', to: 'messages#create'
+    #put 'messages/:id', to: 'messages#update'
+    #delete 'messages/:id', to: 'messages#destroy'
   # show 一覧表示
-  #get 'messages', to: 'messages#index'
-  
+    #get 'messages', to: 'messages#index'
   # new 新規作成
-  #get 'messages/new', to: 'messages#new'
-  
+    #get 'messages/new', to: 'messages#new'
   # edit: 更新
-  #get 'messages/:id/edit', to: 'messages#edit'
+    #get 'messages/:id/edit', to: 'messages#edit'
   
-   # ルートページはmessage 一覧
-  #root to: 'tasks#index'
-  root to: 'toppages#index'
+  # ルートページはmessage 一覧
+  root to: 'tasks#index'
+  #root to: 'toppages#index'
   
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
@@ -30,4 +25,6 @@ Rails.application.routes.draw do
   # ユーザー管理
   get 'signup', to: 'users#new'
   resources :users, only: [:index, :show, :new, :create]
+  
+  #resources :tasks, only: [:create, :destroy]
 end
