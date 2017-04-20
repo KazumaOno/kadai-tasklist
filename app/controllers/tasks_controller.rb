@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :require_user_logged_in, only: [:show, :edit, :update, :destroy]
+  #before_action :require_user_logged_in, only: [:show]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :specify_task, only: [:edit, :update, :destroy]
   
   def index
     @tasks = Task.all.page(params[:page]).per(10)
@@ -54,6 +56,13 @@ class TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  end
+  
+  #ユーザー固有id特定
+  def specify_task
+    if current_user.id != @task.user_id
+      redirect_to login_url
+    end
   end
 
   # Strong Parameter
